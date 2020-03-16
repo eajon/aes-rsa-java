@@ -1,4 +1,4 @@
-package com.wustrive.aesrsa.util;
+package cn.csfz.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

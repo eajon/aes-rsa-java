@@ -1,4 +1,4 @@
-package com.wustrive.aesrsa.util;
+package cn.csfz.util;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -16,13 +16,13 @@ public class EncryUtil {
 	/**
 	 * 生成RSA签名
 	 */
-	public static String handleRSA(TreeMap<String, Object> map,
+	public static String handleRSA(Map<String, String> map,
 			String privateKey) {
-		StringBuffer sbuffer = new StringBuffer();
-		for (Map.Entry<String, Object> entry : map.entrySet()) {
-			sbuffer.append(entry.getValue());
+		StringBuffer stringBuffer = new StringBuffer();
+		for (Map.Entry<String, String> entry : map.entrySet()) {
+			stringBuffer.append(entry.getValue());
 		}
-		String signTemp = sbuffer.toString();
+		String signTemp = stringBuffer.toString();
 
 		String sign = "";
 		if (StringUtils.isNotEmpty(privateKey)) {

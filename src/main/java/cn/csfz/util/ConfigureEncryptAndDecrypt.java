@@ -1,4 +1,4 @@
-package com.wustrive.aesrsa.util;
+package cn.csfz.util;
 
 public class ConfigureEncryptAndDecrypt {
 	public static final String CHAR_ENCODING = "UTF-8";
