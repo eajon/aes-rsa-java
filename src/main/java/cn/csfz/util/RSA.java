@@ -23,15 +23,10 @@ package cn.csfz.util;
 
  --------------------------------------------**********--------------------------------------------
  */
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
-import java.security.Key;
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
-import java.security.Signature;
+import java.security.*;
+import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -49,37 +44,56 @@ public class RSA {
 	/**
 	 * 生成密钥对
 	 */
-	public static Map<String, String> generateKeyPair() throws Exception {
-		/** RSA算法要求有一个可信任的随机数源 */
-		SecureRandom sr = new SecureRandom();
-		/** 为RSA算法创建一个KeyPairGenerator对象 */
-		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
-		/** 利用上面的随机数据源初始化这个KeyPairGenerator对象 */
-		kpg.initialize(KEYSIZE, sr);
-		/** 生成密匙对 */
-		KeyPair kp = kpg.generateKeyPair();
-		/** 得到公钥 */
-		Key publicKey = kp.getPublic();
-		byte[] publicKeyBytes = publicKey.getEncoded();
-		String pub = new String(Base64.encodeBase64(publicKeyBytes),
-				ConfigureEncryptAndDecrypt.CHAR_ENCODING);
-		/** 得到私钥 */
-		Key privateKey = kp.getPrivate();
-		byte[] privateKeyBytes = privateKey.getEncoded();
-		String pri = new String(Base64.encodeBase64(privateKeyBytes),
-				ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+//	public static Map<String, String> generateKeyPair() throws Exception {
+//		/** RSA算法要求有一个可信任的随机数源 */
+//		SecureRandom sr = new SecureRandom();
+//		/** 为RSA算法创建一个KeyPairGenerator对象 */
+//		KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+//		/** 利用上面的随机数据源初始化这个KeyPairGenerator对象 */
+//		kpg.initialize(KEYSIZE, sr);
+//		/** 生成密匙对 */
+//		KeyPair kp = kpg.generateKeyPair();
+//		/** 得到公钥 */
+//		Key publicKey = kp.getPublic();
+//		byte[] publicKeyBytes = publicKey.getEncoded();
+//		String pub = new String(Base64.encodeBase64(publicKeyBytes),
+//				ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+//		/** 得到私钥 */
+//		Key privateKey = kp.getPrivate();
+//		byte[] privateKeyBytes = privateKey.getEncoded();
+//		String pri = new String(Base64.encodeBase64(privateKeyBytes),
+//				ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+//
+//		Map<String, String> map = new HashMap<String, String>();
+//		map.put("publicKey", pub);
+//		map.put("privateKey", pri);
+//		RSAPublicKey rsp = (RSAPublicKey) kp.getPublic();
+//		BigInteger bint = rsp.getModulus();
+//		byte[] b = bint.toByteArray();
+//		byte[] deBase64Value = Base64.encodeBase64(b);
+//		String retValue = new String(deBase64Value);
+//		map.put("modulus", retValue);
+//		return map;
+//	}
 
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("publicKey", pub);
-		map.put("privateKey", pri);
-		RSAPublicKey rsp = (RSAPublicKey) kp.getPublic();
-		BigInteger bint = rsp.getModulus();
-		byte[] b = bint.toByteArray();
-		byte[] deBase64Value = Base64.encodeBase64(b);
-		String retValue = new String(deBase64Value);
-		map.put("modulus", retValue);
-		return map;
+	public static Map<String,String> genKey() throws NoSuchAlgorithmException, UnsupportedEncodingException {
+		Map<String,String> keyMap = new HashMap<String,String>();
+		KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
+		SecureRandom random = new SecureRandom();
+		// random.setSeed(keyInfo.getBytes());
+		// 初始加密，512位已被破解，用1024位,最好用2048位
+		keygen.initialize(1024, random);
+		// 取得密钥对
+		KeyPair kp = keygen.generateKeyPair();
+		RSAPrivateKey privateKey = (RSAPrivateKey)kp.getPrivate();
+		String privateKeyString = new String(Base64.encodeBase64(privateKey.getEncoded()),ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+		RSAPublicKey publicKey = (RSAPublicKey)kp.getPublic();
+		String publicKeyString = new String(Base64.encodeBase64(publicKey.getEncoded()),ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+		keyMap.put("PUBLIC_KEY", publicKeyString);
+		keyMap.put("PRIVATE_KEY", privateKeyString);
+		return keyMap;
 	}
+
 
 	/**
 	 * 加密方法 source： 源数据
