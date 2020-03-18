@@ -25,6 +25,7 @@ public class ZfApi {
             return null;
         }
         receipt.setIsConfirm(0);
+        receipt.setBankCode(BANK_CODE);
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class);
         filter.getExcludes().add("confirmDate");
         filter.getExcludes().add("foreignIncomeNumber");
@@ -58,6 +59,7 @@ public class ZfApi {
             return null;
         }
         receipt.setIsConfirm(1);
+        receipt.setBankCode(BANK_CODE);
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode", "confirmDate", "foreignIncomeNumber", "isConfirm");
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
@@ -88,6 +90,7 @@ public class ZfApi {
         if (!ZfConfig.checkInit()) {
             return null;
         }
+        receipt.setBankCode(BANK_CODE);
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode");
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });

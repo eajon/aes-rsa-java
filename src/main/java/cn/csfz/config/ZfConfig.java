@@ -9,15 +9,14 @@ public class ZfConfig {
     public static String CLIENT_PUBLIC_KEY = "";
     public static String SERVER_HOST = "";
     public static String BANK_CODE = "";
-    public static String BANK_NAME = "";
 
-    public static void init(String serverPublicKey, String clientPrivateKey, String clientPublicKey, String serverHost, String bankCode, String bankName) {
+    public static void init(String serverPublicKey, String clientPrivateKey, String clientPublicKey, String serverHost, String bankCode) {
         SERVER_PUBLIC_KEY = serverPublicKey;
         CLIENT_PRIVATE_KEY = clientPrivateKey;
         CLIENT_PUBLIC_KEY = clientPublicKey;
         SERVER_HOST = serverHost;
         BANK_CODE = bankCode;
-        BANK_NAME = bankName;
+
     }
 
     public static boolean checkInit() {
@@ -34,9 +33,6 @@ public class ZfConfig {
             return false;
         }
         if (StringUtils.isEmpty(BANK_CODE)) {
-            return false;
-        }
-        if (StringUtils.isEmpty(BANK_NAME)) {
             return false;
         }
         return true;
