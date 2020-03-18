@@ -10,6 +10,7 @@ import okhttp3.Headers;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static cn.csfz.config.ZfConfig.*;
 
@@ -27,7 +28,7 @@ public class ZfApi {
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class);
         filter.getExcludes().add("confirmDate");
         filter.getExcludes().add("foreignIncomeNumber");
-        Map<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<Map<String, String>>() {
+        TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
         String sign = EncryUtil.handleRSA(params, CLIENT_PRIVATE_KEY);
         params.put("sign", sign);
@@ -58,7 +59,7 @@ public class ZfApi {
         }
         receipt.setIsConfirm(1);
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode", "confirmDate", "foreignIncomeNumber", "isConfirm");
-        Map<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<Map<String, String>>() {
+        TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
         String sign = EncryUtil.handleRSA(params, CLIENT_PRIVATE_KEY);
         params.put("sign", sign);
@@ -87,7 +88,8 @@ public class ZfApi {
         if (!ZfConfig.checkInit()) {
             return null;
         }
-        Map<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt), new TypeReference<Map<String, String>>() {
+        SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode");
+        TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
         String sign = EncryUtil.handleRSA(params, CLIENT_PRIVATE_KEY);
         params.put("sign", sign);
