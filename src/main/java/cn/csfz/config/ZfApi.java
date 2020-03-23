@@ -49,8 +49,11 @@ public class ZfApi {
         Headers.Builder builder = new Headers.Builder();
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
-
-        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/add", map, builder.build());
+        String host = SERVER_HOST;
+        if (!SERVER_HOST.endsWith("/")) {
+            host = SERVER_HOST + "/";
+        }
+        String response = OkHttpUtils.post(host + "receipt/add", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 
@@ -81,8 +84,11 @@ public class ZfApi {
         Headers.Builder builder = new Headers.Builder();
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
-
-        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/add", map, builder.build());
+        String host = SERVER_HOST;
+        if (!SERVER_HOST.endsWith("/")) {
+            host = SERVER_HOST + "/";
+        }
+        String response = OkHttpUtils.post(host + "receipt/add", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 
@@ -112,8 +118,11 @@ public class ZfApi {
         Headers.Builder builder = new Headers.Builder();
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
-
-        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/queryById", map, builder.build());
+        String host = SERVER_HOST;
+        if (!SERVER_HOST.endsWith("/")) {
+            host = SERVER_HOST + "/";
+        }
+        String response = OkHttpUtils.post(host + "receipt/queryById", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 
