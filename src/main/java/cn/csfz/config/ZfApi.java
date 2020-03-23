@@ -50,7 +50,7 @@ public class ZfApi {
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
 
-        String response = OkHttpUtils.post(SERVER_HOST + "/exchange/receipt/add", map, builder.build());
+        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/add", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 
@@ -82,7 +82,7 @@ public class ZfApi {
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
 
-        String response = OkHttpUtils.post(SERVER_HOST + "/exchange/receipt/add", map, builder.build());
+        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/add", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 
@@ -113,7 +113,7 @@ public class ZfApi {
         builder.set("encryptKey", key);
         builder.set("publicKey", CLIENT_PUBLIC_KEY);
 
-        String response = OkHttpUtils.post(SERVER_HOST + "/exchange/receipt/queryById", map, builder.build());
+        String response = OkHttpUtils.post(SERVER_HOST + "/receipt/queryById", map, builder.build());
         return JSON.parseObject(response, Result.class);
     }
 

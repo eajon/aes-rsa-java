@@ -204,6 +204,30 @@ public class RSA {
 		}
 		
 		return false;
-	}	
+	}
+
+	public static String privateKeyEncrypt(String source, String privateKey)
+			throws Exception {
+		Key key = getPrivateKey(privateKey);
+		/** 得到Cipher对象来实现对源数据的RSA加密 */
+		Cipher cipher = Cipher.getInstance(ConfigureEncryptAndDecrypt.RSA_ALGORITHM);
+		cipher.init(Cipher.ENCRYPT_MODE, key);
+		byte[] b = source.getBytes();
+		/** 执行加密操作 */
+		byte[] b1 = cipher.doFinal(b);
+		return new String(Base64.encodeBase64(b1),
+				ConfigureEncryptAndDecrypt.CHAR_ENCODING);
+	}
+
+	public static String publicKeyDecrypt(String cryptograph,String publicKey) throws Exception {
+		Key key = getPublicKey(publicKey);
+		/** 得到Cipher对象对已用公钥加密的数据进行RSA解密 */
+		Cipher cipher = Cipher.getInstance(ConfigureEncryptAndDecrypt.RSA_ALGORITHM);
+		cipher.init(Cipher.DECRYPT_MODE, key);
+		byte[] b1 = Base64.decodeBase64(cryptograph.getBytes());
+		/** 执行解密操作 */
+		byte[] b = cipher.doFinal(b1);
+		return new String(b);
+	}
 
 }
