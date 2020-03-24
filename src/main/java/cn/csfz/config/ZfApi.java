@@ -20,7 +20,7 @@ public class ZfApi {
         throw new AssertionError();
     }
 
-    public static Result addUnConfirmNotice(Receipt receipt) {
+    public static String addUnConfirmNotice(Receipt receipt) {
         if (!ZfConfig.checkInit()) {
             return null;
         }
@@ -53,11 +53,10 @@ public class ZfApi {
         if (!SERVER_HOST.endsWith("/")) {
             host = SERVER_HOST + "/";
         }
-        String response = OkHttpUtils.post(host + "receipt/add", map, builder.build());
-        return JSON.parseObject(response, Result.class);
+        return  OkHttpUtils.post(host + "receipt/add", map, builder.build());
     }
 
-    public static Result addConfirmNotice(Receipt receipt) {
+    public static String addConfirmNotice(Receipt receipt) {
         if (!ZfConfig.checkInit()) {
             return null;
         }
@@ -88,11 +87,10 @@ public class ZfApi {
         if (!SERVER_HOST.endsWith("/")) {
             host = SERVER_HOST + "/";
         }
-        String response = OkHttpUtils.post(host + "receipt/add", map, builder.build());
-        return JSON.parseObject(response, Result.class);
+        return OkHttpUtils.post(host + "receipt/add", map, builder.build());
     }
 
-    public static Result queryById(Receipt receipt) {
+    public static String queryById(Receipt receipt) {
         if (!ZfConfig.checkInit()) {
             return null;
         }
@@ -122,8 +120,7 @@ public class ZfApi {
         if (!SERVER_HOST.endsWith("/")) {
             host = SERVER_HOST + "/";
         }
-        String response = OkHttpUtils.post(host + "receipt/queryById", map, builder.build());
-        return JSON.parseObject(response, Result.class);
+        return  OkHttpUtils.post(host + "receipt/queryById", map, builder.build());
     }
 
 }
