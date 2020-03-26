@@ -6,13 +6,12 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 
 public class EncryUtil {
-	private static final Logger log = Logger.getLogger(EncryUtil.class);
+
 	/**
 	 * 生成RSA签名
 	 */
@@ -55,7 +54,6 @@ public class EncryUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 			/** AES密钥解密失败 */
-			log.error(e.getMessage(), e);
 			return false;
 		}
 

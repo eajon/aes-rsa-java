@@ -41,6 +41,13 @@ public class Receipt {
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date confirmDate;
 
+    private String confirmRemark;
+
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Date rejectDate;
+
+    private String rejectRemark;
+
 
     private String foreignIncomeNumber;
 
@@ -170,5 +177,29 @@ public class Receipt {
 
     public void setForeignIncomeNumber(String foreignIncomeNumber) {
         this.foreignIncomeNumber = foreignIncomeNumber;
+    }
+
+    public String getConfirmRemark() {
+        return confirmRemark;
+    }
+
+    public void setConfirmRemark(String confirmRemark) {
+        this.confirmRemark = confirmRemark;
+    }
+
+    public Date getRejectDate() {
+        return rejectDate;
+    }
+
+    public void setRejectDate(Date rejectDate) {
+        this.rejectDate = rejectDate;
+    }
+
+    public String getRejectRemark() {
+        return rejectRemark;
+    }
+
+    public void setRejectRemark(String rejectRemark) {
+        this.rejectRemark = rejectRemark;
     }
 }

@@ -5,10 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-import org.apache.log4j.Logger;
+
 
 public class Digest {
-	private static final Logger log = Logger.getLogger(Digest.class);
 	public static final String ENCODE = "UTF-8"; 
 	
 	public static String signMD5(String aValue, String encoding) {
@@ -17,10 +16,8 @@ public class Digest {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			return ConvertUtils.toHex(md.digest(input));
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		} catch (UnsupportedEncodingException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -31,7 +28,6 @@ public class Digest {
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			return ConvertUtils.toHex(md.digest(input));
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -63,7 +59,6 @@ public class Digest {
 		try {
 			md = MessageDigest.getInstance("MD5");
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 		md.update(k_ipad);
@@ -99,7 +94,6 @@ public class Digest {
 		try {
 			md = MessageDigest.getInstance("SHA");
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 		md.update(k_ipad);
@@ -129,7 +123,6 @@ public class Digest {
 		try {
 			md = MessageDigest.getInstance("SHA");
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 		return ConvertUtils.toHex(md.digest(value));
@@ -148,7 +141,6 @@ public class Digest {
 		try {
 			md = MessageDigest.getInstance(alg);
 		} catch (NoSuchAlgorithmException e) {
-			log.error(e.getMessage(), e);
 			return null;
 		}
 		return ConvertUtils.toHex(md.digest(value));

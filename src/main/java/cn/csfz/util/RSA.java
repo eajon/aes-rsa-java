@@ -35,10 +35,9 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
-import org.apache.log4j.Logger;
+
 
 public class RSA {
-	private static final Logger log = Logger.getLogger(RSA.class);
 	/** 指定key的大小 */
 	private static int KEYSIZE = 2048;
 	/**
@@ -200,7 +199,6 @@ public class RSA {
 		} 
 		catch (Exception e) 
 		{
-			log.error(e.getMessage(), e);
 		}
 		
 		return false;
