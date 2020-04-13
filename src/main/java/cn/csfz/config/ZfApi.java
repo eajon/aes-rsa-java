@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.alibaba.fastjson.serializer.SimplePropertyPreFilter;
 import okhttp3.Headers;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +27,9 @@ public class ZfApi {
             throw new IllegalStateException("初始化参数错误!");
         }
         receipt.setIsConfirm(0);
-        receipt.setBankCode(BANK_CODE);
+        if(StringUtils.isEmpty(receipt.getBankCode())) {
+            receipt.setBankCode(BANK_CODE);
+        }
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class);
         filter.getExcludes().add("confirmDate");
         filter.getExcludes().add("confirmRemark");
@@ -66,7 +69,9 @@ public class ZfApi {
             throw new IllegalStateException("初始化参数错误!");
         }
         receipt.setIsConfirm(1);
-        receipt.setBankCode(BANK_CODE);
+        if(StringUtils.isEmpty(receipt.getBankCode())) {
+            receipt.setBankCode(BANK_CODE);
+        }
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode", "confirmDate", "foreignIncomeNumber", "isConfirm", "confirmRemark");
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
@@ -101,7 +106,9 @@ public class ZfApi {
             throw new IllegalStateException("初始化参数错误!");
         }
         receipt.setIsConfirm(2);
-        receipt.setBankCode(BANK_CODE);
+        if(StringUtils.isEmpty(receipt.getBankCode())) {
+            receipt.setBankCode(BANK_CODE);
+        }
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode", "rejectDate", "isConfirm", "rejectRemark");
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
@@ -136,7 +143,9 @@ public class ZfApi {
         }
         Receipt receipt = new Receipt();
         receipt.setBankBusinessId(id);
-        receipt.setBankCode(BANK_CODE);
+        if(StringUtils.isEmpty(receipt.getBankCode())) {
+            receipt.setBankCode(BANK_CODE);
+        }
         SimplePropertyPreFilter filter = new SimplePropertyPreFilter(Receipt.class, "bankBusinessId", "bankCode");
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(receipt, filter), new TypeReference<TreeMap<String, String>>() {
         });
