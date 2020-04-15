@@ -43,8 +43,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>6</source>
+                    <target>6</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -56,6 +56,9 @@
                         <manifest>
                             <mainClass>cn.csfz.Main</mainClass>
                         </manifest>
+                        <manifestEntries>
+                            <Class-Path>lib/*.jar</Class-Path>
+                        </manifestEntries>
                     </archive>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -76,8 +79,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>6</source>
+                    <target>6</target>
                 </configuration>
             </plugin>
 
@@ -104,12 +107,14 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.58</version>
         </dependency>
         <dependency>
-            <groupId>com.squareup.okhttp3</groupId>
+            <groupId>com.square.okhttp3</groupId>
             <artifactId>okhttp</artifactId>
-            <version>4.1.0</version>
+            <version>3.8</version>
+            <scope>system</scope>
+            <systemPath>${pom.basedir}/src/main/resources/lib/okhttp3.8.0-jdk1.6.jar</systemPath>
         </dependency>
     </dependencies>
 </project>

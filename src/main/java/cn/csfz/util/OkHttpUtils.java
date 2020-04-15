@@ -55,17 +55,6 @@ public class OkHttpUtils {
     }
 
 
-    public SSLSocketFactory sslSocketFactory() {
-        try {
-            //信任任何链接
-            SSLContext sslContext = SSLContext.getInstance("TLS");
-            sslContext.init(null, new TrustManager[]{x509TrustManager()}, new SecureRandom());
-            return sslContext.getSocketFactory();
-        } catch (NoSuchAlgorithmException | KeyManagementException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      * Create a new connection pool with tuning parameters appropriate for a single-user application.
@@ -217,7 +206,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String json(String url, String jsonParams) {
-        RequestBody requestBody = RequestBody.create(jsonParams,MediaType.parse("application/json; charset=utf-8"));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonParams);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -232,7 +221,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String json(String url, String jsonParams, Headers headers) {
-        RequestBody requestBody = RequestBody.create(jsonParams,MediaType.parse("application/json; charset=utf-8"));
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonParams);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -248,7 +237,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String xml(String url, String xml) {
-        RequestBody requestBody = RequestBody.create(xml, MediaType.parse("application/xml; charset=utf-8"));
+        RequestBody requestBody = RequestBody.create( MediaType.parse("application/xml; charset=utf-8"),xml);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -263,7 +252,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String xml(String url, String xml, Headers headers) {
-        RequestBody requestBody = RequestBody.create(xml, MediaType.parse("application/xml; charset=utf-8"));
+        RequestBody requestBody = RequestBody.create( MediaType.parse("application/xml; charset=utf-8"),xml);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
