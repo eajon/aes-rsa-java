@@ -1,13 +1,14 @@
 package cn.csfz;
 
+import cn.csfz.config.ZfConfig;
 import cn.csfz.util.RSA;
 
 /**
  * Description: AES+RSA签名，加密 验签，解密
  *
- * @author: wubaoguo
- * @email: wustrive2008@gmail.com
- * @date: 2015/8/13 15:12
+ * @author: wengyijiong
+ * @email: eajon@outlook.com
+ * @date: 2020/8/13 15:12
  */
 public class Main {
 //    private static String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCg6G++Xwnx3d1KUzYfRcKdTtEUexC8b/8LGgrqCQ/GgM7+UkdR84cUCtkAhtaQQ6G+qFhgccut3SXS4KGjW6eoKt2aKzsjyWqKojSDzZXHCVQqTSUHwkqw2qC0lzUzJ5JufaLf9lSlrtGXvuNbZGlMFEGF/OnfDm4CrPg6tZqYKwIDAQAB";
@@ -15,5 +16,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //        String sign =RSA.privateKeyEncrypt("123456",PRIVATE_KEY);
 //        RSA.publicKeyDecrypt(sign,PUBLIC_KEY);
+//        ZfConfig.init();
     }
 }

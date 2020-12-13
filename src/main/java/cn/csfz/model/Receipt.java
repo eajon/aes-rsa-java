@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Receipt {
 
+    private String tenantId;
 
     private String bankBusinessId;
 
@@ -50,6 +51,15 @@ public class Receipt {
 
 
     private String foreignIncomeNumber;
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
 
     public String getBankBusinessId() {
         return bankBusinessId;
