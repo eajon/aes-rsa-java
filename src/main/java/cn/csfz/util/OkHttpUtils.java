@@ -6,6 +6,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.io.InputStream;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -24,17 +25,15 @@ import java.util.concurrent.TimeUnit;
 public class OkHttpUtils {
 
 
-
-    public static OkHttpClient okHttpClient =new
-          OkHttpClient.Builder()
-                //.sslSocketFactory(sslSocketFactory(), x509TrustManager())
-                .retryOnConnectionFailure(true)
-                .connectionPool(pool())
-                .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS)
-                .build();
-
+    public static OkHttpClient okHttpClient = new
+            OkHttpClient.Builder()
+            //.sslSocketFactory(sslSocketFactory(), x509TrustManager())
+            .retryOnConnectionFailure(true)
+            .connectionPool(pool())
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build();
 
 
     public X509TrustManager x509TrustManager() {
@@ -53,7 +52,6 @@ public class OkHttpUtils {
             }
         };
     }
-
 
 
     /**
@@ -150,6 +148,29 @@ public class OkHttpUtils {
                 .build();
         return doRequest(request);
     }
+    /**
+     * post
+     *
+     * @param url    请求的url
+     * @param params post form 提交的参数
+     * @return
+     */
+    public static InputStream download(String url, Map<String, String> params, Headers headers) {
+        FormBody.Builder builder = new FormBody.Builder();
+        //添加参数
+        if (params != null && params.keySet().size() > 0) {
+            for (String key : params.keySet()) {
+                builder.add(key, params.get(key));
+            }
+        }
+        Request request = new Request.Builder()
+                .url(url)
+                .headers(headers)
+                .post(builder.build())
+                .build();
+        return doDownload(request);
+    }
+
 
     /**
      * post
@@ -198,7 +219,6 @@ public class OkHttpUtils {
     }
 
 
-
     /**
      * Post请求发送JSON数据....{"name":"zhangsan","pwd":"123456"}
      * 参数一：请求Url
@@ -206,7 +226,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String json(String url, String jsonParams) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonParams);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParams);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -221,7 +241,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String json(String url, String jsonParams, Headers headers) {
-        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),jsonParams);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), jsonParams);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -237,7 +257,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String xml(String url, String xml) {
-        RequestBody requestBody = RequestBody.create( MediaType.parse("application/xml; charset=utf-8"),xml);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/xml; charset=utf-8"), xml);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -252,7 +272,7 @@ public class OkHttpUtils {
      * 参数三：请求回调
      */
     public static String xml(String url, String xml, Headers headers) {
-        RequestBody requestBody = RequestBody.create( MediaType.parse("application/xml; charset=utf-8"),xml);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/xml; charset=utf-8"), xml);
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody)
@@ -261,7 +281,7 @@ public class OkHttpUtils {
         return doRequest(request);
     }
 
-    private static String doRequest(Request request)  {
+    private static String doRequest(Request request) {
         String responseBody = "";
         try {
             Response response = okHttpClient.newCall(request).execute();
@@ -269,9 +289,21 @@ public class OkHttpUtils {
                 return response.body().string();
             }
         } catch (Exception e) {
-            System.out.println("okhttp3 post error >> ex = {}"+ e);
+            System.out.println("okhttp3 post error >> ex = {}" + e);
         }
         return responseBody;
+    }
+
+    private static InputStream doDownload(Request request) {
+        try {
+            Response response = okHttpClient.newCall(request).execute();
+            if (response.isSuccessful() && response.body() != null) {
+                return response.body().byteStream();
+            }
+        } catch (Exception e) {
+            System.out.println("okhttp3 post error >> ex = {}" + e);
+        }
+        return null;
     }
 
 

@@ -4,41 +4,9 @@
 
     <groupId>cn.csfz</groupId>
     <artifactId>aes-rsa</artifactId>
-    <version>1.1.1</version>
+    <version>1.1.3</version>
     <build>
         <plugins>
-            <!--      <plugin>-->
-            <!--        <artifactId>maven-deploy-plugin</artifactId>-->
-            <!--        <version>2.8.1</version>-->
-            <!--        <configuration>-->
-            <!--          <altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>-->
-            <!--        </configuration>-->
-            <!--      </plugin>-->
-            <!--      <plugin>-->
-            <!--        <groupId>com.github.github</groupId>-->
-            <!--        <artifactId>site-maven-plugin</artifactId>-->
-            <!--        <version>0.12</version>-->
-            <!--        <configuration>-->
-            <!--          <message >Maven artifacts for ${project.version}</message>-->
-            <!--          <noJekyll>true</noJekyll>-->
-            <!--          <outputDirectory>${project.build.directory}/mvn-repo</outputDirectory>&lt;!&ndash;本地jar地址&ndash;&gt;-->
-            <!--          <branch>refs/heads/master</branch>&lt;!&ndash;分支的名称&ndash;&gt;-->
-            <!--          <merge>true</merge>-->
-            <!--          <includes>-->
-            <!--            <include>**/*</include>-->
-            <!--          </includes>-->
-            <!--          <repositoryName>aes-rsa-java</repositoryName>&lt;!&ndash;对应github上创建的仓库名称 name&ndash;&gt;-->
-            <!--          <repositoryOwner>eajon</repositoryOwner>&lt;!&ndash;github 仓库所有者即登录用户名&ndash;&gt;-->
-            <!--        </configuration>-->
-            <!--        <executions>-->
-            <!--          <execution>-->
-            <!--            <goals>-->
-            <!--              <goal>site</goal>-->
-            <!--            </goals>-->
-            <!--            <phase>deploy</phase>-->
-            <!--          </execution>-->
-            <!--        </executions>-->
-            <!--      </plugin>-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -66,7 +34,6 @@
                 </configuration>
                 <executions>
                     <execution>
-
                         <id>make-assembly</id>
                         <phase>package</phase>
                         <goals>
@@ -75,15 +42,22 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>6</source>
-                    <target>6</target>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-compiler-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <source>6</source>-->
+<!--                    <target>6</target>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <configuration>-->
+<!--                    <includeSystemScope>true</includeSystemScope>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 
@@ -107,14 +81,12 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <version>1.2.59</version>
         </dependency>
         <dependency>
-            <groupId>com.square.okhttp3</groupId>
+            <groupId>cn.csfz</groupId>
             <artifactId>okhttp</artifactId>
             <version>3.8</version>
-            <scope>system</scope>
-            <systemPath>${pom.basedir}/src/main/resources/lib/okhttp3.8.0-jdk1.6.jar</systemPath>
         </dependency>
     </dependencies>
 </project>
