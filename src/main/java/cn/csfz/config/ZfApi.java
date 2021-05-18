@@ -101,11 +101,16 @@ public class ZfApi {
             pushExchange.setBankCode(BANK_CODE);
         }
         pushExchange.setTenantId(TENANT_ID);
+        if(StringUtils.isEmpty(pushExchange.getSerialNo()))
+        {
+            throw new IllegalStateException("流水号不能为空");
+        }
         TreeMap<String, String> params = JSONObject.parseObject(JSON.toJSONString(pushExchange), new TypeReference<TreeMap<String, String>>() {
         });
         return request(params, "receipt/pushExchange");
 
     }
+
 
     public static InputStream download(String filePath) {
         if (!ZfSftpConfig.checkInit()) {

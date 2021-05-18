@@ -80,7 +80,6 @@ public class RSA {
 		KeyPairGenerator keygen = KeyPairGenerator.getInstance("RSA");
 		SecureRandom random = new SecureRandom();
 		// random.setSeed(keyInfo.getBytes());
-		// 初始加密，512位已被破解，用1024位,最好用2048位
 		keygen.initialize(1024, random);
 		// 取得密钥对
 		KeyPair kp = keygen.generateKeyPair();

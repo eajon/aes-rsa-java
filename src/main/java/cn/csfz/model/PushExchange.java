@@ -21,6 +21,7 @@ public class PushExchange {
     private String rmbAmount;
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date tradeDate;
+    private boolean isFailed;
 
 
     public String getTenantId() {
@@ -141,5 +142,13 @@ public class PushExchange {
 
     public void setTradeDate(Date tradeDate) {
         this.tradeDate = tradeDate;
+    }
+
+    public boolean isFailed() {
+        return isFailed;
+    }
+
+    public void setFailed(boolean failed) {
+        isFailed = failed;
     }
 }
